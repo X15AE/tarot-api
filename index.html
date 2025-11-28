@@ -850,10 +850,13 @@
 
       let d1 = dateInput1.value;
       if (!d1) {
-        const manual = prompt("Введи дату Партнера 1 у форматі дд.мм.рррр або рррр-мм-дд:", "18.06.1984");
+        const manual = prompt(
+          "Введи дату Партнера 1 у форматі дд.мм.рррр або рррр-мм-дд:",
+          ""
+        );
         if (!manual) return;
-        d1 = manual.trim();
-      }
+       d1 = manual.trim();
+     }
 
       const d2 = dateInput2.value;
 
