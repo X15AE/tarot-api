@@ -148,7 +148,7 @@ CARD_NAMES = {
 def calc_tarot_code(birth) -> TarotCode:
     """
     Основной расчёт по дате рождения.
-    birth: date / datetime / строка "18.06.1984" / "1984-06-18".
+    birth: date / datetime / строка "17.04.1999" / "1999-04-17".
     """
     bd = _parse_birth_date(birth)
     d = bd.day
@@ -375,7 +375,7 @@ def calc_compatibility(birth1, birth2) -> CompatibilityResult:
 
 
 @app.get("/api/tarot")
-def api_tarot(date: str = Query(..., description="Дата у форматі 18.06.1984 або 1984-06-18")):
+def api_tarot(date: str = Query(..., description="Дата у форматі 17.04.1999 або 1999-04-17")):
     """
     Розрахунок коду для однієї дати.
     Повертає:
