@@ -19,16 +19,24 @@
 
     * { box-sizing: border-box; }
 
+    
     body {
       margin: 0;
       padding: 24px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background:
-        radial-gradient(circle at top, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.9) 70%),
-        url("bg-desert.jpg") center/cover fixed no-repeat;
+      background: radial-gradient(circle at top, rgba(15,23,42,0.4) 0%, rgba(15,23,42,0.9) 70%);
       color: var(--text-main);
-    }
-
+         }
+    #bg-video {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      z-index: -1;             /* під усім контентом */
+      filter: brightness(0.9); /* можна трохи затемнити, за бажанням */
+      }
     h1 {
       margin: 0;
       font-size: 26px;
@@ -315,6 +323,11 @@
   </style>
 </head>
 <body>
+  <video id="bg-video" autoplay muted loop playsinline>
+    <source src="clouds.mp4" type="video/mp4" />
+  </video>
+  <!-- далі вже твій top-bar -->
+  <div class="top-bar">
   <div class="top-bar">
     <h1>
       <span class="title-icon">🂫</span>
