@@ -23,8 +23,8 @@
       margin: 0;
       padding: 24px;
       font-family: system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
-      background: #000;
-      color: var(--text-main); /* <-- виправлено */
+      background: #000;          /* фон під відео */
+      color: var(--text-main);   /* ← було "olor" */
     }
 
     #bg-video {
@@ -34,8 +34,8 @@
       width: 100%;
       height: 100%;
       object-fit: cover;
-      z-index: -1;
-      filter: brightness(0.9);
+      z-index: -1;             /* під усім контентом */
+      filter: brightness(0.9); /* трохи затемнюємо відео */
     }
 
     h1 {
@@ -282,7 +282,7 @@
       border: 1px solid #4b5563;
       box-shadow: 0 18px 35px rgba(0,0,0,0.6);
       overflow: hidden;
-      color: #f9fafb; /* тепер весь текст всередині білий */
+      color: #f9fafb;           /* ← тепер весь текст в картці білий */
     }
     .compat-header {
       padding: 8px;
@@ -362,10 +362,8 @@
     <div id="error-box" class="error"></div>
   </div>
 
-  <!-- ... ДАЛІ РОЗМІТКА ДАШБОРДУ + СКРИПТ ЯК У ТВОЄМУ ФАЙЛІ ... -->
-  <!-- (нижню частину я не змінював, вона вже ок) -->
-  ...
-  <!-- Скопіюй з свого index.html нижню частину без змін,
-       починаючи з <div class="dashboard"> і до закриття </html> -->
+  <!-- Далі: твій дашборд, COMPAT, опис карт і скрипт.
+       Вони у тебе вже ок, тож можеш залишити як є з попереднього файлу,
+       або, якщо хочеш, я можу окремо вислати повну версію ще й нижньої частини. -->
 </body>
 </html>
