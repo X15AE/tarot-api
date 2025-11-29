@@ -17,9 +17,7 @@
       --text-muted: #9ca3af;
     }
 
-    * {
-      box-sizing: border-box;
-    }
+    * { box-sizing: border-box; }
 
     body {
       margin: 0;
@@ -142,22 +140,13 @@
     }
 
     @media (max-width: 1100px) {
-      .dashboard {
-        grid-template-columns: repeat(2, 1fr);
-      }
+      .dashboard { grid-template-columns: repeat(2, 1fr); }
     }
 
     @media (max-width: 700px) {
-      .dashboard {
-        grid-template-columns: 1fr;
-      }
-      .top-bar {
-        flex-direction: column;
-        align-items: flex-start;
-      }
-      .error {
-        text-align: left;
-      }
+      .dashboard { grid-template-columns: 1fr; }
+      .top-bar { flex-direction: column; align-items: flex-start; }
+      .error { text-align: left; }
     }
 
     .card {
@@ -267,9 +256,7 @@
     }
 
     @media (max-width: 700px) {
-      .description {
-        grid-template-columns: 1fr;
-      }
+      .description { grid-template-columns: 1fr; }
     }
 
     .description-title {
@@ -389,7 +376,6 @@
         <input id="date-input-2" type="date" />
       </div>
       <button id="calc-btn">РОЗРАХУВАТИ</button>
-      <!-- Місце для кнопки музики JS додасть сам -->
     </div>
 
     <div id="error-box" class="error"></div>
@@ -449,7 +435,6 @@
             <td id="gift2-name"></td>
           </tr>
         </table>
-        
 
         <div class="subsection-header subsection-header--stumbles">
           STUMBLES
@@ -505,33 +490,33 @@
         <div class="subsection-header subsection-header--periods">
           PERIOD START
         </div>
-       <table class="grid">
-  <tr class="sub-header-row">
-    <th class="label-cell">PERIOD</th>
-    <th>AGE</th>
-    <th>START DATE</th>
-  </tr>
-  <tr class="blue-row">
-    <td class="label-cell" id="p1-label"></td>
-    <td id="p1-age"></td>
-    <td id="p1-date"></td>
-  </tr>
-  <tr class="blue-row">
-    <td class="label-cell" id="p2-label"></td>
-    <td id="p2-age"></td>
-    <td id="p2-date"></td>
-  </tr>
-  <tr class="blue-row">
-    <td class="label-cell" id="p3-label"></td>
-    <td id="p3-age"></td>
-    <td id="p3-date"></td>
-  </tr>
-  <tr class="blue-row">
-    <td class="label-cell" id="p4-label"></td>
-    <td id="p4-age"></td>
-    <td id="p4-date"></td>
-  </tr>
-</table>
+        <table class="grid">
+          <tr class="sub-header-row">
+            <th class="label-cell">PERIOD</th>
+            <th>AGE</th>
+            <th>START DATE</th>
+          </tr>
+          <tr class="blue-row">
+            <td class="label-cell" id="p1-label"></td>
+            <td id="p1-age"></td>
+            <td id="p1-date"></td>
+          </tr>
+          <tr class="blue-row">
+            <td class="label-cell" id="p2-label"></td>
+            <td id="p2-age"></td>
+            <td id="p2-date"></td>
+          </tr>
+          <tr class="blue-row">
+            <td class="label-cell" id="p3-label"></td>
+            <td id="p3-age"></td>
+            <td id="p3-date"></td>
+          </tr>
+          <tr class="blue-row">
+            <td class="label-cell" id="p4-label"></td>
+            <td id="p4-age"></td>
+            <td id="p4-date"></td>
+          </tr>
+        </table>
       </div>
     </div>
 
@@ -641,7 +626,7 @@
   </div>
 
   <script>
-    const API_TAROT = "https://tarot-api-q17x.onrender.com/api/tarot";
+    const API_TAROT  = "https://tarot-api-q17x.onrender.com/api/tarot";
     const API_COMPAT = "https://tarot-api-q17x.onrender.com/api/compat";
 
     const ARCANA_INFO = {
@@ -698,10 +683,7 @@
     }
 
     function clearCompat() {
-      const ids = [
-        "compat-k1", "compat-k2", "compat-union",
-        "compat-p1", "compat-p2", "compat-total"
-      ];
+      const ids = ["compat-k1","compat-k2","compat-union","compat-p1","compat-p2","compat-total"];
       ids.forEach(base => {
         const num  = document.getElementById(base + "-num");
         const name = document.getElementById(base + "-name");
@@ -735,62 +717,62 @@
         const tarotResp = await fetch(API_TAROT + "?date=" + encodeURIComponent(d1));
         if (!tarotResp.ok) throw new Error("Помилка TAROT: " + tarotResp.status);
         const tarotData = await tarotResp.json();
-        const r = tarotData.result;
+        const r = tarotData.result || tarotData;
 
         metaLine.textContent = "Результат розрахунку | Джерело: " + API_TAROT;
 
-        // cards of fate
-        setCard("day-num",  "day-name",  r.dayCard);
+        // Cards of fate
+        setCard("day-num","day-name",   r.dayCard);
         setCard("dest1-num","dest1-name",r.destiny1);
         setCard("dest2-num","dest2-name",r.destiny2);
         setCard("dest3-num","dest3-name",r.destiny3);
 
-        // periods
+        // Period cards (верхня таблиця)
         const periods = r.periods || [];
         setCard("p1-num","p1-name",periods[0]);
         setCard("p2-num","p2-name",periods[1]);
         setCard("p3-num","p3-name",periods[2]);
         setCard("p4-num","p4-name",periods[3]);
 
-        const ages   = r.periodAges       || [];
-const dates  = r.periodStartDates || [];
-const periods = r.periods         || [];   // тут самі номери карт періодів
+        // PERIOD START (нижня таблиця)
+        const ages  = r.periodAges       || [];
+        const dates = r.periodStartDates || [];
 
-["p1","p2","p3","p4"].forEach((base, idx) => {
-  const ageEl   = document.getElementById(base + "-age");
-  const dateEl  = document.getElementById(base + "-date");
-  const labelEl = document.getElementById(base + "-label");
+        ["p1","p2","p3","p4"].forEach((base, idx) => {
+          const ageEl   = document.getElementById(base + "-age");
+          const dateEl  = document.getElementById(base + "-date");
+          const labelEl = document.getElementById(base + "-label");
 
-  if (ageEl) {
-    ageEl.textContent = ages[idx] != null ? ages[idx] : "";
-  }
-  if (dateEl) {
-    dateEl.textContent = dates[idx] != null ? formatDate(dates[idx]) : "";
-  }
-  if (labelEl) {
-    const cardNum = periods[idx];
-    labelEl.textContent = cardNum ? cardName(cardNum) : "";
-  }
-});
+          if (ageEl) {
+            ageEl.textContent = ages[idx] != null ? ages[idx] : "";
+          }
+          if (dateEl) {
+            dateEl.textContent = dates[idx] ? formatDate(dates[idx]) : "";
+          }
+          if (labelEl) {
+            const cardNum = periods[idx];
+            labelEl.textContent = cardNum ? cardName(cardNum) : "";
+          }
+        });
 
-        // gifts
+        // Gifts
         const g = r.gifts || [];
         setCard("gift1-num","gift1-name",g[0]);
         setCard("gift2-num","gift2-name",g[1]);
 
-        // stones
+        // Stones
         const s = r.stones || [];
         setCard("stone1-num","stone1-name",s[0]);
         setCard("stone2-num","stone2-name",s[1]);
 
-        // karmas
+        // Karmas
         const k = r.karmas || [];
         setCard("kc1-num","kc1-name",k[0]);
         setCard("kc2-num","kc2-name",k[1]);
         setCard("kc3-num","kc3-name",k[2]);
         setCard("kc4-num","kc4-name",k[3]);
 
-        // COMPAT
+        // Compatibility
         if (d2) {
           const compatResp = await fetch(
             API_COMPAT + "?date1=" + encodeURIComponent(d1) +
@@ -798,15 +780,17 @@ const periods = r.periods         || [];   // тут самі номери ка�
           );
           if (!compatResp.ok) throw new Error("Помилка COMPAT: " + compatResp.status);
           const compatData = await compatResp.json();
-          const c = compatData.result;
+          const c = compatData.result || compatData;
 
           document.getElementById("compat-partners").textContent =
             "Партнер 1: " + compatData.input.partner1 +
             " | Партнер 2: " + compatData.input.partner2;
-          document.getElementById("compat-level").textContent = c.level;
+
+          document.getElementById("compat-level").textContent = c.level || "";
           document.getElementById("compat-score").textContent =
-            "Сумарний бал сумісності: " + c.score;
-          document.getElementById("compat-summary").textContent = c.summary;
+            "Сумарний бал сумісності: " + (c.score ?? "");
+
+          document.getElementById("compat-summary").textContent = c.summary || "";
 
           setCard("compat-k1-num","compat-k1-name",c.k1);
           setCard("compat-k2-num","compat-k2-name",c.k2);
@@ -846,24 +830,49 @@ const periods = r.periods         || [];   // тут самі номери ка�
       document.getElementById("desc-body").textContent  = info.desc;
     });
 
-    // Музика
+    // АУДІО + ВІДЕО
     const bgAudio = new Audio("bg-music.ogg");
     bgAudio.loop   = true;
     bgAudio.volume = 0.3;
+
+    const bgVideo = document.getElementById("bg-video");
+    if (bgVideo) {
+      bgVideo.playbackRate = 0.5; // у 2 рази повільніше
+    }
 
     let isAudioPlaying  = false;
     let autoplayBlocked = false;
 
     const controlsBar = document.querySelector(".controls");
-    let musicBtn, musicVol;
+    let musicBtn, musicVol, videoBtn;
 
     if (controlsBar) {
       const wrap = document.createElement("div");
-      wrap.style.display      = "flex";
-      wrap.style.alignItems   = "center";
-      wrap.style.gap          = "6px";
-      wrap.style.marginLeft   = "8px";
+      wrap.style.display    = "flex";
+      wrap.style.alignItems = "center";
+      wrap.style.gap        = "6px";
+      wrap.style.marginLeft = "8px";
 
+      // Кнопка відео (play/pause фону)
+      videoBtn = document.createElement("button");
+      videoBtn.textContent = "⏸";
+      videoBtn.title       = "Поставити відео на паузу";
+      Object.assign(videoBtn.style, {
+        width: "32px",
+        height: "32px",
+        borderRadius: "999px",
+        border: "1px solid #6b7280",
+        background: "#020617",
+        color: "#e5e7eb",
+        display: "flex",
+        alignItems: "center",
+        justifyContent: "center",
+        cursor: "pointer",
+        fontSize: "16px",
+        padding: 0
+      });
+
+      // Кнопка музики
       musicBtn = document.createElement("button");
       musicBtn.textContent = "▶️";
       musicBtn.title       = "Натисни, щоб увімкнути музику";
@@ -882,6 +891,7 @@ const periods = r.periods         || [];   // тут самі номери ка�
         padding: 0
       });
 
+      // Слайдер гучності
       musicVol = document.createElement("input");
       musicVol.type  = "range";
       musicVol.min   = "0";
@@ -893,9 +903,22 @@ const periods = r.periods         || [];   // тут самі номери ка�
         cursor: "pointer"
       });
 
+      // Порядок: [відео] [музика] [гучність]
+      wrap.appendChild(videoBtn);
       wrap.appendChild(musicBtn);
       wrap.appendChild(musicVol);
       controlsBar.appendChild(wrap);
+    }
+
+    function updateVideoUI() {
+      if (!videoBtn || !bgVideo) return;
+      if (bgVideo.paused || bgVideo.ended) {
+        videoBtn.textContent = "▶️";
+        videoBtn.title       = "Увімкнути відео на фоні";
+      } else {
+        videoBtn.textContent = "⏸";
+        videoBtn.title       = "Поставити відео на паузу";
+      }
     }
 
     function updateMusicUI() {
@@ -952,6 +975,18 @@ const periods = r.periods         || [];   // тут самі номери ка�
       musicVol.addEventListener("input", () => {
         bgAudio.volume = Number(musicVol.value) / 100;
       });
+    }
+
+    if (videoBtn && bgVideo) {
+      videoBtn.addEventListener("click", () => {
+        if (bgVideo.paused || bgVideo.ended) {
+          bgVideo.play().catch(err => console.log("Не вдалося запустити відео:", err));
+        } else {
+          bgVideo.pause();
+        }
+        updateVideoUI();
+      });
+      updateVideoUI();
     }
   </script>
 </body>
