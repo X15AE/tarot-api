@@ -505,31 +505,33 @@
         <div class="subsection-header subsection-header--periods">
           PERIOD START
         </div>
-        <table class="grid">
-          <tr class="sub-header-row">
-            <th class="label-cell">PERIOD</th><th>AGE</th><th>START DATE</th>
-          </tr>
-          <tr class="blue-row">
-            <td class="label-cell">FIRST</td>
-            <td id="p1-age"></td>
-            <td id="p1-date"></td>
-          </tr>
-          <tr class="blue-row">
-            <td class="label-cell">SECOND</td>
-            <td id="p2-age"></td>
-            <td id="p2-date"></td>
-          </tr>
-          <tr class="blue-row">
-            <td class="label-cell">THIRD</td>
-            <td id="p3-age"></td>
-            <td id="p3-date"></td>
-          </tr>
-          <tr class="blue-row">
-            <td class="label-cell">FOURTH</td>
-            <td id="p4-age"></td>
-            <td id="p4-date"></td>
-          </tr>
-        </table>
+       <table class="grid">
+  <tr class="sub-header-row">
+    <th class="label-cell">PERIOD</th>
+    <th>AGE</th>
+    <th>START DATE</th>
+  </tr>
+  <tr class="blue-row">
+    <td class="label-cell" id="p1-label"></td>
+    <td id="p1-age"></td>
+    <td id="p1-date"></td>
+  </tr>
+  <tr class="blue-row">
+    <td class="label-cell" id="p2-label"></td>
+    <td id="p2-age"></td>
+    <td id="p2-date"></td>
+  </tr>
+  <tr class="blue-row">
+    <td class="label-cell" id="p3-label"></td>
+    <td id="p3-age"></td>
+    <td id="p3-date"></td>
+  </tr>
+  <tr class="blue-row">
+    <td class="label-cell" id="p4-label"></td>
+    <td id="p4-age"></td>
+    <td id="p4-date"></td>
+  </tr>
+</table>
       </div>
     </div>
 
@@ -750,14 +752,26 @@
         setCard("p3-num","p3-name",periods[2]);
         setCard("p4-num","p4-name",periods[3]);
 
-        const ages  = r.periodAges       || [];
-        const dates = r.periodStartDates || [];
-        ["p1","p2","p3","p4"].forEach((base, idx) => {
-          const ageEl  = document.getElementById(base + "-age");
-          const dateEl = document.getElementById(base + "-date");
-          if (ageEl)  ageEl.textContent  = ages[idx]  != null ? ages[idx]  : "";
-          if (dateEl) dateEl.textContent = dates[idx] != null ? formatDate(dates[idx]) : "";
-        });
+        const ages   = r.periodAges       || [];
+const dates  = r.periodStartDates || [];
+const periods = r.periods         || [];   // тут самі номери карт періодів
+
+["p1","p2","p3","p4"].forEach((base, idx) => {
+  const ageEl   = document.getElementById(base + "-age");
+  const dateEl  = document.getElementById(base + "-date");
+  const labelEl = document.getElementById(base + "-label");
+
+  if (ageEl) {
+    ageEl.textContent = ages[idx] != null ? ages[idx] : "";
+  }
+  if (dateEl) {
+    dateEl.textContent = dates[idx] != null ? formatDate(dates[idx]) : "";
+  }
+  if (labelEl) {
+    const cardNum = periods[idx];
+    labelEl.textContent = cardNum ? cardName(cardNum) : "";
+  }
+});
 
         // gifts
         const g = r.gifts || [];
